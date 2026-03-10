@@ -1,0 +1,33 @@
+/* Stellt das Box-Sizing von content-box auf border-box padding und border sind dadurch Teil jeder Grössenangabe */
+html {
+    box-sizing: border-box;
+}
+*, *:after, *:before { 
+    box-sizing: border-box;
+}
+
+body {
+    /* Löscht den standardmässig vom Browser gesetzten Rand */
+    margin: 0;
+
+    /* Alle Unterstreichungen bei Unterlängen unterbrechen */
+    text-decoration-skip-ink: auto;
+
+    /* Font Smoothing */
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased; 
+}
+
+/* Überschriften und Absätzen den Standard-margin nehmen und die Schriftfette auf normal setzen */
+h1, h2, h3, h4, p {
+    margin: 0;
+    font-weight: 400;
+}
+
+img,
+video {
+    /* Blockelement, weil sonst ein kleinr Weissraum darunter bleibt */
+    display: block;
+    /* Wir stecken Bilder immer in ein umschliessendes div. Dieses gibt die Bildgrösse vor, das Bild füllt das ganze div */
+    width: 100%;
+}
