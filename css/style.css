@@ -48,10 +48,6 @@ main.project {
   padding-top: 25px;
 }
 
-.main-header {
-  
-}
-
 .nav {
   display: flex;
   gap: 10px;
@@ -73,6 +69,12 @@ main.project {
   font-weight: 700;
 }
 
+.nav-item:hover,
+.nav-item:focus-visible {
+  color: #000000;
+  background: white;
+}
+
 .breadcrumb {
   font-size: 25px;
   color: #000000;
@@ -82,7 +84,7 @@ main.project {
 
 .hero {
   display: grid;
-  margin-bottom: 80px;
+  margin-bottom: 0px;
   position: relative;
 }
 
@@ -106,13 +108,17 @@ main.project {
   margin-top: 0;
 }
 
+.hero-image {
+  margin: 0 40px;
+}
+
 .hero-image img {
   width: 100%;
   height: auto;
   display: block;
   position: relative;
-  width: calc(100% + 50px);
-  margin-left: 200px;
+  width: calc(100% + 40px);
+  padding-left: 200px;
   max-height: 1005px;
 }
 
@@ -128,44 +134,110 @@ main.project {
 .project-intro {
   display: grid;
   grid-template-columns: 1fr 1.3fr;
-  gap: 40px;
-  margin-bottom: 80px;
+  column-gap: 40px;
 }
 
 .project-text h2 {
-  font-size: 28px;
+  margin-top: 50px;
+  font-size: 35px;
   margin-bottom: 20px;
+  padding-left: 50px;
 }
 
 .project-text p {
   margin-bottom: 16px;
-  font-size: 15px;
+  font-size: 20px;
   color: #000000;
   padding-left: 50px;
 }
 
+.intro-image {
+  width: 100%;
+  margin: 0;
+  min-width: 0;
+}
+
+
 .intro-image img {
-  height: 100%;
-  object-fit: cover;
+  width: 100%;
+  height: auto;
 }
 
 .image-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 80px;
+}
+
+.image-grid figure {
+  margin: 0;
 }
 
 .project-data {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 60px;
+  gap: 40px;
   margin-bottom: 80px;
   padding-right: 50px;
 }
 
+.data-image {
+  grid-column: 1;
+  width: 100%;
+  margin: 0;
+  min-width: 0;
+}
+
+.data-image img {
+  width: 100%;
+  height: auto;
+}
+
+.data-text {
+  margin-top: 50px;
+  grid-column: 2;
+  font-size: 20px;
+}
+
+.plan {
+  grid-column: 1 / -1;
+}
+
+.plan {
+  display: grid;
+  position: relative;
+}
+
+.plan-small {
+  position: absolute;
+  right: 100px;
+  top: 40px;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.plan-small img {
+  width: 250px;
+  cursor: pointer;
+  margin-top: -140px;
+}
+
+.plan-small img:first-child {
+  margin-top: 0;
+}
+
+.plan-large {
+  margin: 0 40px;
+}
+
+.plan-large img {
+  width: calc(100% + 40px);
+  padding-right: 200px;
+  max-height: 1005px;
+}
+
 .data-text h3 {
-  font-size: 24px;
+  font-size: 35px;
   margin-bottom: 20px;
 }
 
@@ -175,20 +247,7 @@ main.project {
 
 .data-text li {
   margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.plans {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 40px;
-  margin-bottom: 120px;
-}
-
-.plan-small {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  font-size: 20px;
 }
 
 .plan-large figcaption {
@@ -233,10 +292,6 @@ main.project {
   }
 
   .project-data {
-    grid-template-columns: 1fr;
-  }
-
-  .plans {
     grid-template-columns: 1fr;
   }
 
