@@ -254,4 +254,24 @@ $(document).ready(function() {
         initThumbnailStack('.plan-small', '.plan-large img');
         initScrollRevealSteps();
 
+        // Legal Notice Modal Handler
+        var $modal = $('#legalNoticeModal');
+        var $closeBtn = $('.legal-notice-close');
+        var $legalLink = $('.footer-legal-link');
+
+        $legalLink.on('click', function(e) {
+            e.preventDefault();
+            $modal.addClass('show');
+        });
+
+        $closeBtn.on('click', function() {
+            $modal.removeClass('show');
+        });
+
+        $modal.on('click', function(e) {
+            if (e.target === this) {
+                $modal.removeClass('show');
+            }
+        });
+
     })
