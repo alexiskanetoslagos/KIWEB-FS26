@@ -20,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/scrollama"></script>
 </head>
 
 <body data-sprache-aktiv="de">
@@ -47,7 +48,7 @@
 
   <!-- Breadcrumb -->
   <div class="breadcrumb">
-    Projekte > Kategorie > 0275 – FHNW Campus Muttenz
+    <span class="breadcrumb-item">Projekte</span><span class="breadcrumb-sep"> > </span><span class="breadcrumb-item">Kategorie</span><span class="breadcrumb-sep"> > </span><span class="breadcrumb-item">0275 – FHNW Campus Muttenz</span>
   </div>
 
 
@@ -55,20 +56,17 @@
   <section class="hero">
 
     <div class="hero-thumbnails">
-      <img src="Bilder/Edited/Thumbnails/aussen_zentral_AH_gross.png" alt="">
-      <img src="Bilder/Edited/Thumbnails/aussenwand-W.png" alt=""> 
-      <img src="Bilder/Edited/Thumbnails/Treppenhaus-1.png" alt="">
-      <img src="Bilder/Edited/Thumbnails/Vorlesungssaal-1.png" alt="">
-      <img src="Bilder/Edited/Thumbnails/Dach-1.png" alt="">
-      <img src="Bilder/Edited/Thumbnails/Lounge-1.png" alt="">
+      <img src="Bilder/Edited/big/aussen_zentral_AH_gross.jpg" data-large-src="Bilder/Edited/aussen_zentral_AH_gross-Hero.png" data-large-alt="FHNW Campus Muttenz aussen" alt="">
+      <img src="Bilder/Edited/big/aussenwand-W.jpg" data-large-src="Bilder/Edited/big/aussenwand-W.jpg" data-large-alt="FHNW Campus Muttenz aussenwand" alt=""> 
+      <img src="Bilder/Edited/big/Treppenhaus-1.jpg" data-large-src="Bilder/Edited/big/Treppenhaus-1.jpg" data-large-alt="FHNW Campus Muttenz Treppenhaus" alt="">
+      <img src="Bilder/Edited/big/Dach-1.jpg" data-large-src="Bilder/Edited/big/Dach-1.jpg" data-large-alt="FHNW Campus Muttenz Dach" alt="">
+      <img src="Bilder/Edited/big/Lounge-1.jpg" data-large-src="Bilder/Edited/big/Lounge-1.jpg" data-large-alt="FHNW Campus Muttenz Lounge" alt="">
+      <img src="Bilder/Edited/big/Vorlesungssaal-1.jpg" data-large-src="Bilder/Edited/big/Vorlesungssaal-1.jpg" data-large-alt="FHNW Campus Muttenz Vorlesungssaal" alt="">
 
     </div>
 
     <figure class="hero-image">
       <img src="Bilder/Edited/aussen_zentral_AH_gross-Hero.png" alt="FHNW Campus Muttenz aussen">
-      <figcaption class="image-caption">
-        bla bla ich bin bild relevant
-      </figcaption>
     </figure>
 
   </section>
@@ -78,7 +76,7 @@
   <!-- TEXT + IMAGE -->
   <section class="project-intro">
 
-    <article class="project-text">
+    <article class="project-text scroll-reveal-step" data-step="project-text">
 
       <h2>Subtitle</h2>
 
@@ -96,7 +94,7 @@
 
     </article>
 
-    <figure class="intro-image">
+    <figure class="intro-image scroll-reveal-image" data-step="intro-image">
       <img src="Bilder/Edited/Project-image-1.png">
     </figure>
 
@@ -107,15 +105,15 @@
   <!-- IMAGE GRID -->
   <section class="image-grid">
 
-    <figure>
+    <figure class="scroll-reveal-image" data-step="grid-image-1" data-stagger="0">
       <img src="Bilder/Edited/Grid-1.png" alt="">
     </figure>
 
-    <figure>
+    <figure class="scroll-reveal-image" data-step="grid-image-2" data-stagger="140">
       <img src="Bilder/Edited/Grid-2.png" alt="">
     </figure>
 
-    <figure>
+    <figure class="scroll-reveal-image" data-step="grid-image-3" data-stagger="280">
       <img src="Bilder/Edited/Grid-3.png" alt="">
     </figure>
 
@@ -126,11 +124,11 @@
   <!-- DATA + PLAN -->
   <section class="project-data">
 
-    <figure class="data-image">
+    <figure class="data-image scroll-reveal-image" data-step="data-image">
       <img src="Bilder/Edited/Plan-image-1.png" alt="Project detail image">
     </figure>
 
-    <div class="data-text">
+    <div class="data-text scroll-reveal-step" data-step="data-text">
 
       <h3>Daten</h3>
 
@@ -142,17 +140,16 @@
     <section class="plan">
 
       <div class="plan-small">
-        <img src="Bilder/Edited/Thumbnails/Plans/Outside1.png" alt="Building section thumbnail">
-        <img src="Bilder/Edited/Thumbnails/Plans/Outside2.png" alt="Building section thumbnail">
-        <img src="Bilder/Edited/Thumbnails/Plans/Top-view-full.png" alt="Building section thumbnail">
-        <img src="Bilder/Edited/Thumbnails/Plans/Top-view1.png" alt="Building section thumbnail">
-        <img src="Bilder/Edited/Thumbnails/Plans/Top-view2.png" alt="Building section thumbnail">
-        <img src="Bilder/Edited/Thumbnails/Plans/Top-view3.png" alt="Building section thumbnail">
+        <img src="Bilder/Edited/Thumbnails/Plans/Outside1.png" data-large-src="Bilder/Edited/plan-large/Outside1.png" data-large-alt="Building section outside view 1" alt="Building section thumbnail">
+        <img src="Bilder/Edited/Thumbnails/Plans/Outside2.png" data-large-src="Bilder/Edited/plan-large/Outside2.png" data-large-alt="Building section outside view 2" alt="Building section thumbnail">
+        <img src="Bilder/Edited/Thumbnails/Plans/Top-view-full.png" data-large-src="Bilder/Edited/plan-large/Top-view-full.png" data-large-alt="Building top view full" alt="Building section thumbnail">
+        <img src="Bilder/Edited/Thumbnails/Plans/Top-view1.png" data-large-src="Bilder/Edited/plan-large/Top-view1.png" data-large-alt="Building top view 1" alt="Building section thumbnail">
+        <img src="Bilder/Edited/Thumbnails/Plans/Top-view2.png" data-large-src="Bilder/Edited/plan-large/Top-view2.png" data-large-alt="Building top view 2" alt="Building section thumbnail">
+        <img src="Bilder/Edited/Thumbnails/Plans/Top-view3.png" data-large-src="Bilder/Edited/plan-large/Top-view3.png" data-large-alt="Building top view 3" alt="Building section thumbnail">
       </div>
 
-      <figure class="plan-large">
-        <img src="Bilder/Edited/Outside2.png" alt="Building Section">
-        <figcaption>bla bla ich bin bild relevant</figcaption>
+      <figure class="plan-large scroll-reveal-image" data-step="plan-large">
+        <img src="Bilder/Edited/plan-large/Outside1.png" alt="Building section outside view 1">
       </figure>
 
     </section>

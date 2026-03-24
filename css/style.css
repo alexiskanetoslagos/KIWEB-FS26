@@ -58,7 +58,19 @@ main.project {
   font-size: 25px;
   color: #000000;
   margin: 0 0 25px 50px;
+}
+
+.breadcrumb-item {
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.breadcrumb-item:hover {
+  color: blue;
+}
+
+.breadcrumb-sep {
+  text-decoration: none;
 }
 
 .hero {
@@ -70,17 +82,18 @@ main.project {
 .hero-thumbnails {
   position: absolute;
   left: 100px;
-  top: 40px;
+  top: 100px;
 
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  z-index: 20;
 }
 
 .hero-thumbnails img {
   width: 350px;
   cursor: pointer;
   margin-top: -200px; /* controls overlap */
+  transition: margin-top 320ms ease-in-out, box-shadow 320ms ease-in-out;
 }
 
 .hero-thumbnails img:first-child {
@@ -88,17 +101,25 @@ main.project {
 }
 
 .hero-image {
-  margin: 0 40px;
+  margin: 0;
+  width: 1728px;
+  height: 1005px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-image img {
-  width: 100%;
-  height: auto;
+  width: 1528px;
+  height: 100%;
   display: block;
   position: relative;
-  width: calc(100% + 40px);
-  padding-left: 200px;
-  max-height: 1005px;
+  margin-left: 200px;
+  margin-right: 0;
+  object-fit: cover;
+  object-position: right center;
+  opacity: 1;
+  transition: opacity 260ms ease-in-out;
 }
 
 .image-caption {
@@ -156,7 +177,7 @@ main.project {
   grid-template-columns: 2fr 1fr;
   gap: 40px;
   margin-bottom: 80px;
-  padding-right: 50px;
+  padding-right: 0;
 }
 
 .data-image {
@@ -177,6 +198,26 @@ main.project {
   font-size: 20px;
 }
 
+body.scrollama-ready .scroll-reveal-step {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 520ms ease, transform 520ms ease;
+}
+
+body.scrollama-ready .scroll-reveal-step.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.scrollama-ready .scroll-reveal-image {
+  opacity: 0;
+  transition: opacity 520ms ease;
+}
+
+body.scrollama-ready .scroll-reveal-image.is-visible {
+  opacity: 1;
+}
+
 .plan {
   grid-column: 1 / -1;
 }
@@ -192,13 +233,20 @@ main.project {
   top: 40px;
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  z-index: 20;
 }
 
 .plan-small img {
   width: 250px;
   cursor: pointer;
   margin-top: -140px;
+  transition: margin-top 320ms ease-in-out, box-shadow 320ms ease-in-out;
+}
+
+.hero-thumbnails img.is-active,
+.plan-small img.is-active {
+  position: relative;
+  z-index: 3;
 }
 
 .plan-small img:first-child {
@@ -206,13 +254,35 @@ main.project {
 }
 
 .plan-large {
-  margin: 0 40px;
+  margin: 0;
+  width: 1728px;
+  position: relative;
+  z-index: 1;
 }
 
 .plan-large img {
-  width: calc(100% + 40px);
-  padding-right: 200px;
+  width: 1528px;
+  margin-left: 0;
+  margin-right: 200px;
   max-height: 1005px;
+  opacity: 1;
+  transition: opacity 260ms ease-in-out;
+}
+
+.hero-image .image-fade-overlay,
+.plan-large .image-fade-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 360ms ease-in-out;
+}
+
+.hero-image .image-fade-overlay.is-fading-out,
+.plan-large .image-fade-overlay.is-fading-out {
+  opacity: 0;
 }
 
 .data-text h3 {
@@ -256,7 +326,24 @@ main.project {
   margin-bottom: 10px;
 }
 
+.footer-logo img {
+  width: 375px;
+  height: 132px;
+}
+
 @media (max-width: 1000px) {
+
+  .hero-image img,
+  .plan-large img {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .hero-image,
+  .plan-large {
+    width: 100%;
+  }
 
   .hero {
     grid-template-columns: 1fr;
