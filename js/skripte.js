@@ -77,11 +77,37 @@ $(document).ready(function() {
                 activeIndex = Math.max(0, Math.min(nextIndex, $thumbnails.length - 1));
                 applyActiveLayout(activeIndex);
                 syncLargeImage(activeIndex);
+                scrollActiveThumbnailIntoView();
+            }
+
+            function scrollActiveThumbnailIntoView() {
+                if (!window.matchMedia('(max-width: 1024px)').matches) {
+                    return;
+                }
+
+                var container = $container[0];
+                var activeThumb = $thumbnails.eq(activeIndex)[0];
+
+                if (!container || !activeThumb) {
+                    return;
+                }
+
+                var targetScrollLeft = activeThumb.offsetLeft - (container.clientWidth / 2) + (activeThumb.offsetWidth / 2);
+                var maxScrollLeft = container.scrollWidth - container.clientWidth;
+
+                targetScrollLeft = Math.max(0, Math.min(targetScrollLeft, maxScrollLeft));
+
+                if (typeof container.scrollTo === 'function') {
+                    container.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
+                } else {
+                    container.scrollLeft = targetScrollLeft;
+                }
             }
 
             function preloadLargeImages() {
                 $thumbnails.each(function() {
                     var mappedSrc = $(this).attr('data-large-src');
+                    var mobileSrc = $(this).attr('data-mobile-src');
 
                     if (!mappedSrc || preloadCache[mappedSrc]) {
                         return;
@@ -90,7 +116,24 @@ $(document).ready(function() {
                     var preloadImage = new Image();
                     preloadImage.src = mappedSrc;
                     preloadCache[mappedSrc] = preloadImage;
+
+                    if (mobileSrc && !preloadCache[mobileSrc]) {
+                        var mobilePreloadImage = new Image();
+                        mobilePreloadImage.src = mobileSrc;
+                        preloadCache[mobileSrc] = mobilePreloadImage;
+                    }
                 });
+            }
+
+            function getResponsiveLargeSrc($thumb) {
+                var mobileSrc = $thumb.attr('data-mobile-src');
+                var desktopSrc = $thumb.attr('data-large-src');
+
+                if (window.matchMedia('(max-width: 1024px)').matches && mobileSrc) {
+                    return mobileSrc;
+                }
+
+                return desktopSrc;
             }
 
             function syncLargeImage(index) {
@@ -99,7 +142,7 @@ $(document).ready(function() {
                 }
 
                 var $activeThumb = $thumbnails.eq(index);
-                var largeSrc = $activeThumb.attr('data-large-src');
+                var largeSrc = getResponsiveLargeSrc($activeThumb);
                 var largeAlt = $activeThumb.attr('data-large-alt') || $activeThumb.attr('alt');
 
                 // Only switch when an explicit large-image mapping exists.
@@ -116,9 +159,6 @@ $(document).ready(function() {
                     return;
                 }
 
-                imageSwapToken += 1;
-                var activeSwapToken = imageSwapToken;
-
                 var $swapContainer = $largeImage.parent();
                 var $overlay = $largeImage.clone();
 
@@ -133,11 +173,6 @@ $(document).ready(function() {
                 $swapContainer.append($overlay);
 
                 function runCrossfade() {
-                    if (activeSwapToken !== imageSwapToken) {
-                        $overlay.remove();
-                        return;
-                    }
-
                     $largeImage.attr('src', largeSrc);
 
                     if (typeof largeAlt !== 'undefined') {
@@ -161,10 +196,6 @@ $(document).ready(function() {
 
                     preloadedImage.onload = runCrossfade;
                     preloadedImage.onerror = function() {
-                        if (activeSwapToken !== imageSwapToken) {
-                            return;
-                        }
-
                         $largeImage.attr('src', largeSrc);
 
                         if (typeof largeAlt !== 'undefined') {
@@ -193,22 +224,29 @@ $(document).ready(function() {
 
             function applyActiveLayout(activeIndex) {
                 var topEdgeSpacingMargin = getTopEdgeSpacingMargin();
+                var isMobile = window.matchMedia('(max-width: 1024px)').matches;
 
                 $thumbnails.removeClass('is-active');
 
                 $thumbnails.each(function(index) {
-                    var marginTop;
-
-                    if (index === 0) {
-                        marginTop = 0;
-                    } else if (index === activeIndex + 1) {
-                        // Keep a 50px gap below the active thumbnail.
-                        marginTop = 50;
+                    // On mobile, clear any inline margins (CSS handles horizontal layout).
+                    // On desktop, apply the vertical stacking effect.
+                    if (isMobile) {
+                        $(this).css('margin-top', '');
                     } else {
-                        marginTop = topEdgeSpacingMargin;
-                    }
+                        var marginTop;
 
-                    $(this).css('margin-top', marginTop + 'px');
+                        if (index === 0) {
+                            marginTop = 0;
+                        } else if (index === activeIndex + 1) {
+                            // Keep a 50px gap below the active thumbnail.
+                            marginTop = 50;
+                        } else {
+                            marginTop = topEdgeSpacingMargin;
+                        }
+
+                        $(this).css('margin-top', marginTop + 'px');
+                    }
                 });
 
                 $thumbnails.eq(activeIndex).addClass('is-active');

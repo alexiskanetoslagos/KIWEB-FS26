@@ -38,7 +38,7 @@ main.project {
   text-decoration: none;
   color: rgb(255, 255, 255);
   background: #000000; /* same as page background */
-  font-size: 30px;
+  font-size: clamp(18px, 2vw, 30px);
 }
 
 /* active page */
@@ -55,7 +55,7 @@ main.project {
 }
 
 .breadcrumb {
-  font-size: 25px;
+  font-size: clamp(16px, 1.8vw, 25px);
   color: #000000;
   margin: 0 0 25px 50px;
 }
@@ -81,8 +81,8 @@ main.project {
 
 .hero-thumbnails {
   position: absolute;
-  left: 100px;
-  top: 100px;
+  left: clamp(16px, 5.8vw, 100px);
+  top: clamp(16px, 5.8vw, 100px);
 
   display: flex;
   flex-direction: column;
@@ -90,9 +90,9 @@ main.project {
 }
 
 .hero-thumbnails img {
-  width: 350px;
+  width: clamp(180px, 22vw, 350px);
   cursor: pointer;
-  margin-top: -200px; /* controls overlap */
+  margin-top: clamp(-200px, -14vw, -120px); /* controls overlap */
   transition: margin-top 320ms ease-in-out, box-shadow 320ms ease-in-out;
 }
 
@@ -102,24 +102,34 @@ main.project {
 
 .hero-image {
   margin: 0;
-  width: 1728px;
-  height: 1005px;
+  width: 100%;
+  max-width: 1728px;
+  aspect-ratio: 1728 / 1005;
+  height: auto;
+  padding-left: clamp(16px, 11.6vw, 200px);
   overflow: hidden;
   position: relative;
   z-index: 1;
 }
 
 .hero-image img {
-  width: 1528px;
+  width: 100%;
   height: 100%;
   display: block;
   position: relative;
-  margin-left: 200px;
+  margin-left: 0;
   margin-right: 0;
   object-fit: cover;
   object-position: right center;
   opacity: 1;
   transition: opacity 260ms ease-in-out;
+}
+
+@media (min-width: 1025px) and (max-width: 1400px) {
+  .hero-thumbnails {
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 .image-caption {
@@ -139,14 +149,14 @@ main.project {
 
 .project-text h2 {
   margin-top: 50px;
-  font-size: 35px;
+  font-size: clamp(26px, 2.2vw, 35px);
   margin-bottom: 20px;
   padding-left: 50px;
 }
 
 .project-text p {
   margin-bottom: 16px;
-  font-size: 20px;
+  font-size: clamp(16px, 1.1vw, 20px);
   color: #000000;
   padding-left: 50px;
 }
@@ -170,11 +180,19 @@ main.project {
 
 .image-grid figure {
   margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image-grid figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .project-data {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1.3fr 1fr;
   gap: 40px;
   margin-bottom: 80px;
   padding-right: 0;
@@ -183,6 +201,7 @@ main.project {
 .data-image {
   grid-column: 1;
   width: 100%;
+  height: auto;
   margin: 0;
   min-width: 0;
 }
@@ -195,7 +214,15 @@ main.project {
 .data-text {
   margin-top: 50px;
   grid-column: 2;
-  font-size: 20px;
+  font-size: clamp(16px, 1.1vw, 20px);
+}
+
+.data-text p {
+  margin-bottom: 8px;
+}
+
+.data-text p:last-child {
+  margin-bottom: 0;
 }
 
 body.scrollama-ready .scroll-reveal-step {
@@ -255,16 +282,18 @@ body.scrollama-ready .scroll-reveal-image.is-visible {
 
 .plan-large {
   margin: 0;
-  width: 1728px;
+  width: 100%;
+  max-width: 1728px;
+  padding-right: clamp(16px, 11.6vw, 200px);
   position: relative;
   z-index: 1;
 }
 
 .plan-large img {
-  width: 1528px;
+  width: 100%;
   margin-left: 0;
-  margin-right: 200px;
-  max-height: 1005px;
+  margin-right: 0;
+  max-height: none;
   opacity: 1;
   transition: opacity 260ms ease-in-out;
 }
@@ -286,7 +315,7 @@ body.scrollama-ready .scroll-reveal-image.is-visible {
 }
 
 .data-text h3 {
-  font-size: 35px;
+  font-size: clamp(26px, 2.2vw, 35px);
   margin-bottom: 20px;
 }
 
@@ -329,42 +358,6 @@ body.scrollama-ready .scroll-reveal-image.is-visible {
 .footer-logo img {
   width: 375px;
   height: 132px;
-}
-
-@media (max-width: 1000px) {
-
-  .hero-image img,
-  .plan-large img {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .hero-image,
-  .plan-large {
-    width: 100%;
-  }
-
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .project-intro {
-    grid-template-columns: 1fr;
-  }
-
-  .image-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .project-data {
-    grid-template-columns: 1fr;
-  }
-
-  .footer {
-    grid-template-columns: 1fr;
-  }
-
 }
 
 /* Legal Notice Modal */
