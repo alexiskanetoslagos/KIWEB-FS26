@@ -1,4 +1,4 @@
-/* Stellt das Box-Sizing von content-box auf border-box padding und border sind dadurch Teil jeder Grössenangabe */
+/* Sets the box-sizing from content-box to border-box. Padding and border are now part of any size specification. */
 html {
     box-sizing: border-box;
 }
@@ -7,10 +7,10 @@ html {
 }
 
 body {
-    /* Löscht den standardmässig vom Browser gesetzten Rand */
+    /* Deletes the default browser margin */
     margin: 0;
 
-    /* Alle Unterstreichungen bei Unterlängen unterbrechen */
+    /* Interrupts all underlines at descenders */
     text-decoration-skip-ink: auto;
 
     /* Font Smoothing */
@@ -18,16 +18,16 @@ body {
     -webkit-font-smoothing: antialiased; 
 }
 
-/* Überschriften und Absätzen den Standard-margin nehmen und die Schriftfette auf normal setzen */
-h1, h2, h3, h4, p {
+/* Remove default margin from headings and paragraphs and set font-weight to normal */
+h2, h3, p {
     margin: 0;
     font-weight: 400;
 }
 
 img,
 video {
-    /* Blockelement, weil sonst ein kleinr Weissraum darunter bleibt */
+    /* Block element, otherwise a small white space remains below it */
     display: block;
-    /* Wir stecken Bilder immer in ein umschliessendes div. Dieses gibt die Bildgrösse vor, das Bild füllt das ganze div */
+    /* We always put images in a surrounding div. This specifies the image size, and the image fills the entire div. */
     width: 100%;
 }
